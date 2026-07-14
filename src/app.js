@@ -7,7 +7,7 @@ const app = express();
 // ── CORS first ─────────────────────────────────────────
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: ["http://localhost:5173", "http://localhost:3000", "https://ravornvillaboutique.online"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }),
@@ -45,5 +45,13 @@ app.use("/api/attendance", attendanceRoutes);
 app.use("/api/staff", staffRoutes);
 app.use("/api/locations", locationRoutes);
 app.use("/api/prices", priceRoutes);
+
+
+app.get("/api", (req, res) => {
+  res.json({
+    message: "Hotel Management API is running",
+    status: "success",
+  });
+});
 
 module.exports = app;
