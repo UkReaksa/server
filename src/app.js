@@ -54,19 +54,23 @@ app.get("/api", (req, res) => {
   });
 });
 
+const db = require("./config/db");
+
 app.get("/api/test-db", (req, res) => {
-  db.query("SELECT NOW() AS time", (err, result) => {
+  db.query("SELECT NOW() AS current_time", (err, rows) => {
     if (err) {
+      console.error(err);
+
       return res.status(500).json({
         success: false,
-        error: err.message,
         code: err.code,
+        message: err.message,
       });
     }
 
     res.json({
       success: true,
-      result,
+      rows,
     });
   });
 });
