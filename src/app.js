@@ -54,4 +54,21 @@ app.get("/api", (req, res) => {
   });
 });
 
+app.get("/api/test-db", (req, res) => {
+  db.query("SELECT NOW() AS time", (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        error: err.message,
+        code: err.code,
+      });
+    }
+
+    res.json({
+      success: true,
+      result,
+    });
+  });
+});
+
 module.exports = app;
